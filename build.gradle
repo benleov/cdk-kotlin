@@ -1,0 +1,65 @@
+group 'cdk-kotlin'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+
+    ext.kotlin_version = '1.2.71'
+    ext.cdk_version = '0.10.0'
+    ext.jsii_version = '0.7.6'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.myorg.HelloApp"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+
+    compile "software.amazon.jsii:jsii-runtime:${jsii_version}"
+
+    compile "software.amazon.awscdk:cdk:${cdk_version}"
+    compile "software.amazon.awscdk:ec2:${cdk_version}"
+    compile "software.amazon.awscdk:s3:${cdk_version}"
+    compile "software.amazon.awscdk:sns:${cdk_version}"
+    compile "software.amazon.awscdk:sqs:${cdk_version}"
+
+    compile "org.jetbrains.kotlin:kotlin-runtime:${kotlin_version}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect"
+
+    testCompile  'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
