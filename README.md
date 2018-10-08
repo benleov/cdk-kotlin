@@ -27,5 +27,9 @@ https://github.com/awslabs/aws-cdk
  * `cdk diff`        compare deployed stack with current state
  * `cdk docs`        open CDK documentation
 
+# Further reading
+
+https://awslabs.github.io/aws-cdk/getting-started.html
+
 Enjoy!
 
